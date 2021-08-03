@@ -44,24 +44,38 @@ function getPin(){
 
      if(generatedPin === typedPin){
         pinMatchMessage('block', 'none');
+        document.getElementById('action-left').innerText = 3;
+        count = 0;
      }
      else{
         pinMatchMessage('none', 'block');
+        count = count + 1;
+        const actionLeftCount = 1;
+       document.getElementById('action-left').innerText = parseInt(document.getElementById('action-left').innerText) - actionLeftCount;
+        if (count >= 3) {
+            btnDisabledAfterWrongAttempts();
+            document.getElementById('generated-pin').value = '';
+            document.getElementById('action-left').innerText = 0;
+        }
      }
      document.getElementById('typed-digit').value = "";
          
-     count = count + 1;
-     const actionLeftCount = 1;
-    document.getElementById('action-left').innerText = parseInt(document.getElementById('action-left').innerText) - actionLeftCount;
-    if (count >= 3) {
-        document.getElementById('submit-btn').disabled = true; 
-        document.getElementById('typed-digit').disabled = true; 
-        document.getElementById('generated-pin').value = '';
-        document.getElementById('action-left').innerText = 0;
-    }
+    //  count = count + 1;
+    //  const actionLeftCount = 1;
+    // document.getElementById('action-left').innerText = parseInt(document.getElementById('action-left').innerText) - actionLeftCount;
+    // if (count >= 3) {
+    //     btnDisabledAfterWrongAttempts();
+    //     document.getElementById('generated-pin').value = '';
+    //     document.getElementById('action-left').innerText = 0;
+    // }
  }
 
  function pinMatchMessage(correct,wrong){
     document.getElementById('correct-pin').style.display = correct;
     document.getElementById('wrong-pin').style.display = wrong;
+ }
+
+ function btnDisabledAfterWrongAttempts(){
+             document.getElementById('submit-btn').disabled = true; 
+        document.getElementById('typed-digit').disabled = true; 
  }
